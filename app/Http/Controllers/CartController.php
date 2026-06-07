@@ -30,13 +30,9 @@ class CartController extends Controller
         return response()->json($cart);
     }
 
-    public function removeFromCart(Request $request)
+    public function removeFromCart(Request $request, $product)
     {
-        $request->validate([
-            'product_id' => 'required|exists:products,id',
-        ]);
-
-        $cart = $this->cartService->removeFromCart($request->user(), $request->product_id);
+        $cart = $this->cartService->removeFromCart($request->user(), $product);
         return response()->json($cart);
     }
 
@@ -46,6 +42,4 @@ class CartController extends Controller
         $cart = $this->cartService->clearCart($request->user());
         return response()->json($cart);
     }
-
-    
 }

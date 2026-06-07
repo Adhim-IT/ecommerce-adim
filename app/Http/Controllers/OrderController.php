@@ -28,12 +28,12 @@ class OrderController extends Controller
         return response()->json($orders);
     }
 
-    public function updateOrderStatus(Request $request, Order $order)
-    {
-        $request->validate([
-            'status' => 'required|in:pending,completed,cancelled',
-        ]);
-        $updated = $this->orderService->updateOrderStatus($order, $request->status);
-        return response()->json($updated);
-    }
+    // public function updateOrderStatus(Request $request, Order $order)
+    // {
+    //     $request->validate([
+    //         'status' => 'required|in:pending,completed,cancelled',
+    //     ]);
+    //     $updated = $this->orderService->updateOrderStatus($order, $request->status);
+    //     return response()->json($updated);
+    // }
 }

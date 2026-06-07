@@ -38,7 +38,7 @@ Route::middleware('auth:api')->group(function () {
 
     Route::post('/orders', [OrderController::class, 'createOrder']);
     Route::get('/orders', [OrderController::class, 'getUserOrders']);
-    Route::patch('/orders/{order}/status', [OrderController::class, 'updateOrderStatus']);
+    // Route::patch('/orders/{order}/status', [OrderController::class, 'updateOrderStatus']);
 });
 
 
