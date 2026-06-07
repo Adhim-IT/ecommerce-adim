@@ -23,39 +23,38 @@ class AuthController extends Controller
         $user->assignRole('customer');
         $token = auth('api')->login($user);
         Cart::create(['user_id' => $user->id]);
+        $user->load('roles');
         return response()->json([
             'user' => $user,
             'token' => $token,
         ], 201);
-    } 
-    
+    }
+
     public function login(LoginRequest $request)
     {
         if(!$token = auth('api')->attempt($request->only('email' , 'password'))){
             return response()->json(['error' => 'Invalid credentials'], 401);
         }
-        // $user = User::where('email', $request->email)->first();
-        
-        // if($user){
-        //     return back()->withErrors(['email' => 'User not found']);
-        // }
-        
+
+        $user = auth('api')->user()->load('roles');
+
         return response()->json([
-            'user' => auth('api')->user(),
+            'user' => $user,
             'token' => $token
         ]);
-        
+
     }
 
 
     public function logout()
     {
         auth('api')->logout();
+
         return response()->json(['message' => 'berhasil logout']);
     }
 
     public function me()
     {
-        return response()->json(auth('api')->user());
+        return response()->json(auth('api')->user()->load('roles'));
     }
 }

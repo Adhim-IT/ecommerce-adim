@@ -6,9 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Main\ProductRequest;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests; 
+
 
 class ProductController extends Controller
 {
+    use AuthorizesRequests; 
     public function index()
     {
         $products = Product::paginate(10);
