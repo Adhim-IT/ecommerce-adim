@@ -26,7 +26,7 @@ class UserController extends Controller
             'email' => $validated['email'],
             'password' => bcrypt($validated['password']),
         ]);
-
+        $user->assignRole('customer');
         return response()->json($user, 201);
     }
 
