@@ -31,6 +31,8 @@ class User extends Authenticatable implements JWTSubject
             'password' => 'hashed',
         ];
     }
+
+    protected $guard_name = 'api';
     public function getJWTIdentifier()
     {
         return $this->getKey();
